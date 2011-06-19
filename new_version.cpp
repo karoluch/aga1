@@ -192,6 +192,12 @@ void Plansza::oznacz9()
     react(9);
 }
 
+void setText(QPushButton *pb, char ch) {
+    static char tmp[2];
+    tmp[0] = ch; tmp[1] = '\0';
+    pb->setText(tmp);
+}
+
 void Plansza::react(int liczba)
 {
     std::cerr << "user made move " << liczba-1 << "\n";
