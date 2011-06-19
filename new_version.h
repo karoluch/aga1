@@ -11,7 +11,7 @@
 struct Ruch
 {
     int ruch;
-    bool czy_wyg() { return (ruch == 10 || ruch == -10); }
+    bool czy_wyg() { return (ruch == 50 || ruch == -50); }
     bool czy_rem() { return ruch==20; }
     Ruch () { }
     inline Ruch(int r) : ruch(r) {}
@@ -28,7 +28,7 @@ class Engine
     bool remis();
     public:
         Ruch usermove (int);  //zwraca ruch lub powiadomienie o zakonczeniu gry
-        Engine() { for (int i=0; i<9; i++) pole[i]=' '; compsymbol = 'O'; }
+        Engine() { for (int i=0; i<9; i++) pole[i]=' '; compsymbol = 'O'; usersymbol = 'X'; }
 };
 
 class Plansza : public QDialog, public Ui_Plansza
@@ -41,7 +41,7 @@ class Plansza : public QDialog, public Ui_Plansza
     public:
         Plansza(QWidget *parent = 0);
     private slots:
-        void oznacz1();  //1. ustaw napis; 2. set disabled; 3. react(int);
+        void oznacz1();
         void oznacz2();
         void oznacz3();
         void oznacz4();
