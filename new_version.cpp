@@ -47,7 +47,7 @@ int Engine::minmax(char symbol)
 
 Ruch Engine::usermove(int liczba)
 {
-    pole[liczba-1] = usersymbol;
+    pole[liczba-1] = 'X';
     Ruch result;
     if(wygrana() == 1)
     {
