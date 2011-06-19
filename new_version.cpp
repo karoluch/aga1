@@ -94,7 +94,7 @@ Ruch Engine::usermove(int liczba)
         }
     }
     pole[move] = compsymbol;
-    result.ruch = move+1;
+    result.ruch = move;
     return result;
 }
 
@@ -223,7 +223,7 @@ void Plansza::react(int liczba)
     }
     if (result.ruch)
     {
-        switch (result.ruch)
+        switch (result.ruch)z
         {
             case 0: pb1->setText("O"); pb1->setEnabled(false); break; //dokładniej: compsymbol
             case 1: pb2->setText("O"); pb2->setEnabled(false); break;
