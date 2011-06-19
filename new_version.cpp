@@ -10,7 +10,7 @@ int Engine::wygrana()
     }
     for (int i = 1; i<=3; i++)
     {
-        if ((pole[i-1] == pole[i]) && (pole[i] == pole[i+1]))
+        if ((pole[i-1] == pole[i+2]) && (pole[i+2] == pole[i+5]))
             pole[i] == compsymbol ? result = 1 : result = -1;
     }
     if ((pole[0] == pole[4]) && (pole[4] == pole[8]))
@@ -24,7 +24,7 @@ bool Engine::remis()
 {
     for (int i = 0; i<9; i++)
     {
-        if (pole[i] == 0)
+        if (pole[i] == ' ')
             return false;
     }
     return true;

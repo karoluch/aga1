@@ -10,10 +10,17 @@
 
 struct Ruch
 {
+    Ruch(int r) : ruch(r) {}
     int ruch;
+<<<<<<< HEAD
+    bool czy_wyg() { return (ruch == 10 || ruch == -10); }
+    bool czy_rem() { return ruch==20; }
+=======
     bool czy_wyg() { if (ruch == 10 || ruch == -10) return true; }
-    //bool czy_prz() { if (ruch == 20) return true; }
     bool czy_rem() { if (ruch == 20) return true; }
+    inline Ruch(int r) : ruch(r) {}
+    inline operator int() const { return ruch; }
+>>>>>>> 092866d0fe491fddd195b9bab909286124401ace
 };
 
 class Engine
