@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "new_version.h"
 #include <algorithm>
 
@@ -10,17 +11,21 @@ int Engine::wygrana()
     int result = 0;
     for (int i = 1; i<=7; i+=3)
     {
-        if (pole[i] != ' ' && pole[i-1] == pole[i] && pole[i] == pole[i+1])
-            pole[i] == compsymbol ? result = 1 : result = -1; //rezultat równy 1 to wygrana komputera, -1: wygrana człeka
+        if ((pole[i-1] == pole[i]) && (pole[i] == pole[i+1]) && pole[i]!=' ')
+            pole[i] == compsymbol ? result = 1 : result = -1;
+            //pole[i] == 'O' ? result = 1 : result = -1;
     }
     for (int i = 1; i<=3; i++)
     {
-        if (pole[i-1] != ' ' && pole[i-1] == pole[i+2] && pole[i+2] == pole[i+5])
+        if ((pole[i-1] == pole[i+2]) && (pole[i+2] == pole[i+5]) && pole[i]!=' ')
+            //pole[i] == 'O' ? result = 1 : result = -1;
             pole[i] == compsymbol ? result = 1 : result = -1;
     }
-    if (pole[4] != ' ' && pole[0] == pole[4] && pole[4] == pole[8])
+    if ((pole[0] == pole[4]) && (pole[4] == pole[8]) && pole[4]!=' ')
+        // pole[4] == 'O' ? result = 1 : result = -1;
         pole[4] == compsymbol ? result = 1 : result = -1;
-    if (pole[2] == pole[4] && pole[4] == pole[6] && pole[4] != ' ')
+    if ((pole[2] == pole[4]) && (pole[4] == pole[6]) && pole[4]!=' ')
+        // pole[4] == 'O' ? result = 1 : result = -1;
         pole[4] == compsymbol ? result = 1 : result = -1;
     return result;
 }
@@ -42,7 +47,8 @@ int Engine::minmax(char symbol)
     int wyg = wygrana();
     if (wyg) return wyg;
     if (remis()) return 0;
-    int mmx = (symbol == compsymbol ? -1 : 1);
+    //int mmx = (symbol == compsymbol ? -1 : 1);
+    int mmx = (symbol == 'O' ? -1 : 1);
     for (int i=0; i<9; i++) if (pole[i] == ' ') {
         pole[i] = symbol;
         int m = minmax(symbol == 'X' ? 'O' : 'X');
@@ -58,16 +64,16 @@ int Engine::minmax(char symbol)
 
 Ruch Engine::usermove(int liczba)
 {
-    pole[liczba-1] = usersymbol;
+    pole[liczba-1] = 'X';
     Ruch result;
     if(wygrana() == 1)
     {
-        result.ruch = 10;
+        result.ruch = 50;
         return result;
     }
     if(wygrana() == -1)
     {
-        result.ruch = -10;
+        result.ruch = -50;
         return result;
     }
     if(remis())
@@ -190,13 +196,23 @@ void Plansza::react(int liczba)
     std::cerr << "komp odpowiada " << result.ruch << "\n";
     if (result.czy_wyg())
     {
-        msgbox = new QMessageBox(this);
-        if (result.ruch == 10)
+        //msgbox = new QMessageBox(this);
+        if (result.ruch == 50)
+        {
+            msgbox = new QMessageBox(this);
             msgbox->setText("Computer wins this game.");
-        else if (result.ruch == -10)
+            msgbox->exec();
+            qApp->quit();
+        }
+        else if (result.ruch == -50)
+        {
+            msgbox = new QMessageBox(this);
             msgbox->setText("Player wins this game.");
-        msgbox->exec();
-        qApp->quit();
+            msgbox->exec();
+            qApp->quit();
+        }
+        //msgbox->exec();
+        //qApp->quit();
     }
     if (result.czy_rem())
     {
