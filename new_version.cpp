@@ -1,6 +1,5 @@
 #include <algorithm>
 #include "new_version.h"
-#include <algorithm>
 
 using namespace std;
 
@@ -13,19 +12,15 @@ int Engine::wygrana()
     {
         if ((pole[i-1] == pole[i]) && (pole[i] == pole[i+1]) && pole[i]!=' ')
             pole[i] == compsymbol ? result = 1 : result = -1;
-            //pole[i] == 'O' ? result = 1 : result = -1;
     }
     for (int i = 1; i<=3; i++)
     {
-        if ((pole[i-1] == pole[i+2]) && (pole[i+2] == pole[i+5]) && pole[i]!=' ')
-            //pole[i] == 'O' ? result = 1 : result = -1;
-            pole[i] == compsymbol ? result = 1 : result = -1;
+        if ((pole[i-1] == pole[i+2]) && (pole[i+2] == pole[i+5]) && pole[i+2]!=' ')
+            pole[i+2] == compsymbol ? result = 1 : result = -1;
     }
     if ((pole[0] == pole[4]) && (pole[4] == pole[8]) && pole[4]!=' ')
-        // pole[4] == 'O' ? result = 1 : result = -1;
         pole[4] == compsymbol ? result = 1 : result = -1;
     if ((pole[2] == pole[4]) && (pole[4] == pole[6]) && pole[4]!=' ')
-        // pole[4] == 'O' ? result = 1 : result = -1;
         pole[4] == compsymbol ? result = 1 : result = -1;
     return result;
 }
@@ -47,24 +42,24 @@ int Engine::minmax(char symbol)
     int wyg = wygrana();
     if (wyg) return wyg;
     if (remis()) return 0;
-    //int mmx = (symbol == compsymbol ? -1 : 1);
-    int mmx = (symbol == 'O' ? -1 : 1);
-    for (int i=0; i<9; i++) if (pole[i] == ' ') {
+    int mmx = (symbol == compsymbol ? -1 : 1);
+    for (int i=0; i<9; i++) if (pole[i] == ' ') 
+    {
         pole[i] = symbol;
-        int m = minmax(symbol == 'X' ? 'O' : 'X');
+        int m = minmax(symbol == 'X' ? 'O' : 'X'); // te znaczki tez zamienic na compsymbol i usersymbol?
         pole[i] = ' ';
 
         if (symbol == compsymbol)
-            mmx = std::max(mmx, m);
+            mmx = max(mmx, m);
         else
-            mmx = std::min(mmx, m);
+            mmx = min(mmx, m);
     }
     return mmx;
 }
 
 Ruch Engine::usermove(int liczba)
 {
-    pole[liczba-1] = 'X';
+    pole[liczba-1] = usersymbol;
     Ruch result;
     if(wygrana() == 1)
     {
@@ -93,7 +88,7 @@ Ruch Engine::usermove(int liczba)
             move = i;
         }
     }
-    pole[move] = compsymbol;
+    pole[move+1] = compsymbol;
     result.ruch = move+1;
     return result;
 }
@@ -127,63 +122,63 @@ DEFOZNACZ(oznacz4,pb4,4)
 
 void Plansza::oznacz1()
 {
-    pb1->setText("X"); //tak naprawdę tu będziemy wpisywać usersymbol
+    pb1->setText(usersymbol);
     pb1->setEnabled(false);
     react(1);
 }
 
 void Plansza::oznacz2()
 {
-    pb2->setText("X");
+    pb2->setText(usersymbol);
     pb2->setEnabled(false);
     react(2);
 }
 
 void Plansza::oznacz3()
 {
-    pb3->setText("X");
+    pb3->setText(usersymbol);
     pb3->setEnabled(false);
     react(3);
 }
 
 void Plansza::oznacz4()
 {
-    pb4->setText("X");
+    pb4->setText(usersymbol);
     pb4->setEnabled(false);
     react(4);
 }
 
 void Plansza::oznacz5()
 {
-    pb5->setText("X");
+    pb5->setText(usersymbol);
     pb5->setEnabled(false);
     react(5);
 }
 
 void Plansza::oznacz6()
 {
-    pb6->setText("X");
+    pb6->setText(usersymbol);
     pb6->setEnabled(false);
     react(6);
 }
 
 void Plansza::oznacz7()
 {
-    pb7->setText("X");
+    pb7->setText(usersymbol);
     pb7->setEnabled(false);
     react(7);
 }
 
 void Plansza::oznacz8()
 {
-    pb8->setText("X");
+    pb8->setText(usersymbol);
     pb8->setEnabled(false);
     react(8);
 }
 
 void Plansza::oznacz9()
 {
-    pb9->setText("X");
+    pb9->setText(usersymbol);
     pb9->setEnabled(false);
     react(9);
 }
@@ -196,7 +191,6 @@ void Plansza::react(int liczba)
     std::cerr << "komp odpowiada " << result.ruch << "\n";
     if (result.czy_wyg())
     {
-        //msgbox = new QMessageBox(this);
         if (result.ruch == 50)
         {
             msgbox = new QMessageBox(this);
@@ -211,8 +205,6 @@ void Plansza::react(int liczba)
             msgbox->exec();
             qApp->quit();
         }
-        //msgbox->exec();
-        //qApp->quit();
     }
     if (result.czy_rem())
     {
@@ -221,19 +213,19 @@ void Plansza::react(int liczba)
         msgbox->exec();
         qApp->quit();
     }
-    if (result.ruch)
-    {
+    //if (result.ruch)
+    //{
         switch (result.ruch)
         {
-            case 0: pb1->setText("O"); pb1->setEnabled(false); break; //dokładniej: compsymbol
-            case 1: pb2->setText("O"); pb2->setEnabled(false); break;
-            case 2: pb3->setText("O"); pb3->setEnabled(false); break;
-            case 3: pb4->setText("O"); pb4->setEnabled(false); break;
-            case 4: pb5->setText("O"); pb5->setEnabled(false); break;
-            case 5: pb6->setText("O"); pb6->setEnabled(false); break;
-            case 6: pb7->setText("O"); pb7->setEnabled(false); break;
-            case 7: pb8->setText("O"); pb8->setEnabled(false); break;
-            case 8: pb9->setText("O"); pb9->setEnabled(false); break;
+            case 0: pb1->setText(compsymbol); pb1->setEnabled(false); break;
+            case 1: pb2->setText(compsymbol); pb2->setEnabled(false); break;
+            case 2: pb3->setText(compsymbol); pb3->setEnabled(false); break;
+            case 3: pb4->setText(compsymbol); pb4->setEnabled(false); break;
+            case 4: pb5->setText(compsymbol); pb5->setEnabled(false); break;
+            case 5: pb6->setText(compsymbol); pb6->setEnabled(false); break;
+            case 6: pb7->setText(compsymbol); pb7->setEnabled(false); break;
+            case 7: pb8->setText(compsymbol); pb8->setEnabled(false); break;
+            case 8: pb9->setText(compsymbol); pb9->setEnabled(false); break;
         }
-    }
+    //}
 }
