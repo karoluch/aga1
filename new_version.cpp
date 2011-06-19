@@ -188,6 +188,12 @@ void Plansza::oznacz9()
     react(9);
 }
 
+void setText(QPushButton *pb, char ch) {
+    static char tmp[2];
+    tmp[0] = ch; tmp[1] = '\0';
+    pb->setText(tmp);
+}
+
 void Plansza::react(int liczba)
 {
     std::cerr << "user made move " << liczba << "\n";
@@ -221,19 +227,16 @@ void Plansza::react(int liczba)
         msgbox->exec();
         qApp->quit();
     }
-    if (result.ruch)
+    switch (result.ruch)
     {
-        switch (result.ruch)z
-        {
-            case 0: pb1->setText("O"); pb1->setEnabled(false); break; //dokładniej: compsymbol
-            case 1: pb2->setText("O"); pb2->setEnabled(false); break;
-            case 2: pb3->setText("O"); pb3->setEnabled(false); break;
-            case 3: pb4->setText("O"); pb4->setEnabled(false); break;
-            case 4: pb5->setText("O"); pb5->setEnabled(false); break;
-            case 5: pb6->setText("O"); pb6->setEnabled(false); break;
-            case 6: pb7->setText("O"); pb7->setEnabled(false); break;
-            case 7: pb8->setText("O"); pb8->setEnabled(false); break;
-            case 8: pb9->setText("O"); pb9->setEnabled(false); break;
-        }
+        case 0: setText(pb1,silnik.comp()); pb1->setEnabled(false); break; //dokładniej: compsymbol
+        case 1: setText(pb2,silnik.comp()); pb2->setEnabled(false); break;
+        case 2: setText(pb3,silnik.comp()); pb3->setEnabled(false); break;
+        case 3: setText(pb4,silnik.comp()); pb4->setEnabled(false); break;
+        case 4: setText(pb5,silnik.comp()); pb5->setEnabled(false); break;
+        case 5: setText(pb6,silnik.comp()); pb6->setEnabled(false); break;
+        case 6: setText(pb7,silnik.comp()); pb7->setEnabled(false); break;
+        case 7: setText(pb8,silnik.comp()); pb8->setEnabled(false); break;
+        case 8: setText(pb9,silnik.comp()); pb9->setEnabled(false); break;
     }
 }
