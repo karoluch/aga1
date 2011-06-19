@@ -84,14 +84,14 @@ Ruch Engine::usermove(int liczba)
         pole[i] = compsymbol;
         int m = minmax(usersymbol);
         pole[i] = ' ';
-        if(m > mmx)
+        if(m >= mmx)
         {
             mmx = m;
             move = i;
         }
     }
-    pole[move+1] = compsymbol;
-    result.ruch = move+1;
+    pole[move] = compsymbol;
+    result.ruch = move;
     return result;
 }
 
@@ -194,7 +194,7 @@ void Plansza::oznacz9()
 
 void Plansza::react(int liczba)
 {
-    std::cerr << "user made move " << liczba << "\n";
+    std::cerr << "user made move " << liczba-1 << "\n";
     Ruch result;
     result = silnik.usermove(liczba);
     std::cerr << "komp odpowiada " << result.ruch << "\n";
