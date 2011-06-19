@@ -13,6 +13,8 @@ struct Ruch
     int ruch;
     bool czy_wyg() { if (ruch == 10 || ruch == -10) return true; }
     bool czy_rem() { if (ruch == 20) return true; }
+    inline Ruch(int r) : ruch(r) {}
+    inline operator int() const { return ruch; }
 };
 
 class Engine
