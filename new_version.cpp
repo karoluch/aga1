@@ -17,9 +17,9 @@ int Engine::wygrana()
     }
     for (int i = 1; i<=3; i++)
     {
-        if ((pole[i-1] == pole[i+2]) && (pole[i+2] == pole[i+5]) && pole[i]!=' ')
+        if ((pole[i-1] == pole[i+2]) && (pole[i+2] == pole[i+5]) && pole[i-1]!=' ')
             //pole[i] == 'O' ? result = 1 : result = -1;
-            pole[i] == compsymbol ? result = 1 : result = -1;
+            pole[i-1] == compsymbol ? result = 1 : result = -1;
     }
     if ((pole[0] == pole[4]) && (pole[4] == pole[8]) && pole[4]!=' ')
         // pole[4] == 'O' ? result = 1 : result = -1;
