@@ -31,6 +31,8 @@ class Engine
     public:
         Ruch usermove (int);  //zwraca ruch lub powiadomienie o zakonczeniu gry
         Engine() { for (int i=0; i<9; i++) pole[i]=' '; compsymbol = 'O'; usersymbol = 'X'; }
+        char comp() { return compsymbol; }
+        char user() { return usersymbol; }
 };
 
 class Plansza : public QDialog, public Ui_Plansza
@@ -40,6 +42,7 @@ class Plansza : public QDialog, public Ui_Plansza
         QMessageBox *msgbox;
         Engine silnik;
         void react(int);  //które pole od 1 do 9 sie zmienilo
+        void setText(QPushButton *pb, char ch);
     public:
         Plansza(QWidget *parent = 0);
     private slots:
