@@ -1,5 +1,7 @@
 #include "new_version.h"
 
+/* 1: wygrywa komputer
+   -1: wygrywa gracz */
 int Engine::wygrana()
 {
     int result = 0;
@@ -30,13 +32,25 @@ bool Engine::remis()
     return true;
 }
 
+/* minmax symbol zwraca wartość najlepszego ruchu po postawieniu symbolu 'symbol'
+    (najlepszy w rozumieniu gracza, który się teraz rusza) */
 int Engine::minmax(char symbol)
 {
-    int whowins = wygrana();
-    if (whowins) return whowins;
+    int wyg = wygrana();
+    if (wyg) return wyg;
     if (remis()) return 0;
     int mmx = (symbol == compsymbol ? -1 : 1);
+    for (int i=0; i<9; i++) if (pole[i] == ' ') {
+        pole[i] = symbol;
+        int m = minmax(symbol == 'X' ? 'O' : 'X');
+        pole[i] = ' ';
 
+        if (symbol == compsymbol)
+            mmx = max(mmx, m);
+        else
+            mmx = min(mmx, m);
+    }
+    return mmx;
 }
 
 Ruch Engine::usermove(int liczba)
@@ -58,24 +72,20 @@ Ruch Engine::usermove(int liczba)
         result.ruch = 20;
         return result;
     }
-    
-    int move, i, m, mmx;
-    mmx = -10;
-    for(i = 1; i <= 9; i++)
+
+    int mmx = -1, move = -1;
+    for(i = 0; i < 9; i++) if(pole[i] == ' ')
     {
-        if(pole[i] == ' ')
+        pole[i] = compsymbol;
+        int m = minmax(usermove);
+        pole[i] = ' ';
+        if(m > mmx)
         {
-            pole[i] = compsymbol;
-            m = minmax(compsymbol);
-            pole[i] = ' ';
-            if(m > mmx)
-            {
-                mmx = m; 
-                move = i;
-            }
+            mmx = m;
+            move = i;
         }
     }
-    result.ruch = move;
+    result.ruch = move+1;
     return result;
 }
 
