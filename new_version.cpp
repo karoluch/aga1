@@ -32,17 +32,11 @@ bool Engine::remis()
 
 int Engine::minmax(char symbol)
 {
-    int m;
-    int mmx = -10;
-    for(int i = 1; i <= 9; i++)
-        if(pole[i] == ' ')
-        {
-            pole[i] = symbol;
-            m = minmax(symbol);
-            pole[i] = ' ';
-            if(((symbol == 'O') && (m < mmx)) || ((symbol == 'X') && (m > mmx))) mmx = m;
-        }
-    return mmx;    
+    int whowins = wygrana();
+    if (whowins) return whowins;
+    if (remis()) return 0;
+    int mmx = (symbol == compsymbol ? -1 : 1);
+
 }
 
 Ruch Engine::usermove(int liczba)
@@ -98,6 +92,19 @@ Plansza::Plansza (QWidget *parent) : QDialog(parent)
     connect(pb8, SIGNAL(clicked()), this, SLOT(oznacz8()));
     connect(pb9, SIGNAL(clicked()), this, SLOT(oznacz9()));
 }
+
+/*
+#define DEFOZNACZ(funkcja,slot,numer) \
+void Plansza::funkcja() { \
+    slot->setText("X"); \
+    slot->setEnabled(false); \
+    react(numer); \
+}
+DEFOZNACZ(oznacz1,pb1,1)
+DEFOZNACZ(oznacz2,pb2,2)
+DEFOZNACZ(oznacz3,pb3,3)
+DEFOZNACZ(oznacz4,pb4,4)
+... tak też można:) */
 
 void Plansza::oznacz1()
 {
