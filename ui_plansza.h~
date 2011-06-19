@@ -1,0 +1,104 @@
+/********************************************************************************
+** Form generated from reading UI file 'plansza.ui'
+**
+** Created: Sun Jun 19 00:50:47 2011
+**      by: Qt User Interface Compiler version 4.6.2
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_PLANSZA_H
+#define UI_PLANSZA_H
+
+#include <QtCore/QVariant>
+#include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QDialog>
+#include <QtGui/QHeaderView>
+#include <QtGui/QPushButton>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_Plansza
+{
+public:
+    QPushButton *pb1;
+    QPushButton *pb4;
+    QPushButton *pb7;
+    QPushButton *pb2;
+    QPushButton *pb5;
+    QPushButton *pb8;
+    QPushButton *pb3;
+    QPushButton *pb6;
+    QPushButton *pb9;
+
+    void setupUi(QDialog *Plansza)
+    {
+        if (Plansza->objectName().isEmpty())
+            Plansza->setObjectName(QString::fromUtf8("Plansza"));
+        Plansza->resize(326, 331);
+        pb1 = new QPushButton(Plansza);
+        pb1->setObjectName(QString::fromUtf8("pb1"));
+        pb1->setGeometry(QRect(10, 10, 100, 100));
+        pb4 = new QPushButton(Plansza);
+        pb4->setObjectName(QString::fromUtf8("pb4"));
+        pb4->setGeometry(QRect(10, 110, 100, 100));
+        pb7 = new QPushButton(Plansza);
+        pb7->setObjectName(QString::fromUtf8("pb7"));
+        pb7->setGeometry(QRect(10, 210, 100, 100));
+        pb2 = new QPushButton(Plansza);
+        pb2->setObjectName(QString::fromUtf8("pb2"));
+        pb2->setGeometry(QRect(110, 10, 100, 100));
+        pb5 = new QPushButton(Plansza);
+        pb5->setObjectName(QString::fromUtf8("pb5"));
+        pb5->setGeometry(QRect(110, 110, 100, 100));
+        pb8 = new QPushButton(Plansza);
+        pb8->setObjectName(QString::fromUtf8("pb8"));
+        pb8->setGeometry(QRect(110, 210, 100, 100));
+        pb3 = new QPushButton(Plansza);
+        pb3->setObjectName(QString::fromUtf8("pb3"));
+        pb3->setGeometry(QRect(210, 10, 100, 100));
+        pb6 = new QPushButton(Plansza);
+        pb6->setObjectName(QString::fromUtf8("pb6"));
+        pb6->setGeometry(QRect(210, 110, 100, 100));
+        pb9 = new QPushButton(Plansza);
+        pb9->setObjectName(QString::fromUtf8("pb9"));
+        pb9->setGeometry(QRect(210, 210, 100, 100));
+        QWidget::setTabOrder(pb1, pb2);
+        QWidget::setTabOrder(pb2, pb3);
+        QWidget::setTabOrder(pb3, pb4);
+        QWidget::setTabOrder(pb4, pb5);
+        QWidget::setTabOrder(pb5, pb6);
+        QWidget::setTabOrder(pb6, pb7);
+        QWidget::setTabOrder(pb7, pb8);
+        QWidget::setTabOrder(pb8, pb9);
+
+        retranslateUi(Plansza);
+
+        QMetaObject::connectSlotsByName(Plansza);
+    } // setupUi
+
+    void retranslateUi(QDialog *Plansza)
+    {
+        Plansza->setWindowTitle(QApplication::translate("Plansza", "Gra", 0, QApplication::UnicodeUTF8));
+        pb1->setText(QString());
+        pb4->setText(QString());
+        pb7->setText(QString());
+        pb2->setText(QString());
+        pb5->setText(QString());
+        pb8->setText(QString());
+        pb3->setText(QString());
+        pb6->setText(QString());
+        pb9->setText(QString());
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class Plansza: public Ui_Plansza {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_PLANSZA_H
