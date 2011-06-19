@@ -10,9 +10,10 @@
 
 struct Ruch
 {
+    Ruch(int r) : ruch(r) {}
     int ruch;
-    bool czy_wyg() { if (ruch == 10 || ruch == -10) return true; }
-    bool czy_rem() { if (ruch == 20) return true; }
+    bool czy_wyg() { return (ruch == 10 || ruch == -10); }
+    bool czy_rem() { return ruch==20; }
 };
 
 class Engine
