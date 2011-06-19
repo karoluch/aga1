@@ -6,6 +6,8 @@
 #include <QtGui>
 
 #include "ui_plansza.h"
+#include <algorithm>
+#include <iostream>
 
 
 struct Ruch
